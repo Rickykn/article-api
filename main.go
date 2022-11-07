@@ -41,9 +41,10 @@ func main() {
 		ArticleService: as,
 	})
 
-	article := r.Group("/article")
+	article := r.Group("/articles")
 	{
 		article.POST("/", h.CreateArticle)
+		article.GET("/", h.GetAllArticle)
 	}
 
 	err := r.Run()

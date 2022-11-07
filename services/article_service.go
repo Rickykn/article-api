@@ -7,7 +7,7 @@ import (
 )
 
 type ArticleService interface {
-	GetAllArticle()
+	GetAllArticle(query *help.Query) (*help.JsonResponse, error)
 	CreateNewArticle(articleInput *dtos.ArticleInputDTO) (*help.JsonResponse, error)
 }
 
@@ -25,8 +25,14 @@ func NewArticleService(c *ASConfig) ArticleService {
 	}
 }
 
-func (a *articleService) GetAllArticle() {
+func (a *articleService) GetAllArticle(query *help.Query) (*help.JsonResponse, error) {
+	articles, err := a.articleRepository.Find(query)
 
+	if err != nil {
+		return help.HandlerError(500, "Server Error", nil), err
+	}
+
+	return help.HandlerSuccess(200, "Get All Article Success", articles), nil
 }
 
 func (a *articleService) CreateNewArticle(articleInput *dtos.ArticleInputDTO) (*help.JsonResponse, error) {
