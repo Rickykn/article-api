@@ -5,3 +5,9 @@ type ArticleInputDTO struct {
 	Title  string `json:"title" binding:"required"`
 	Body   string `json:"body" binding:"required"`
 }
+
+type ArticleInputUpdateDTO struct {
+	Author string `json:"author" `
+	Title  string `json:"title" `
+	Body   string `json:"body" `
+}

@@ -45,6 +45,9 @@ func main() {
 	{
 		article.POST("/", h.CreateArticle)
 		article.GET("/", h.GetAllArticle)
+		article.GET("/:id", h.GetArticleById)
+		article.DELETE("/:id", h.DeleteArticleById)
+		article.PATCH("/:id", h.UpdateArticleById)
 	}
 
 	err := r.Run()
